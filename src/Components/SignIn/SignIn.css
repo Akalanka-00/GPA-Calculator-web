@@ -17,6 +17,26 @@
     height: 4px;
 }
 
+.bottom-form {
+    margin-top: 2rem;
+    padding: 0 10% 0 10%;
+    display: flex;
+    justify-content: space-between;
+}
+
 .forget-psw{
     text-align: left;
 }
+
+.signup-btn{
+    margin-top: 2rem;
+    padding: 0 10% 0 10%;
+    display: flex;
+    justify-content: left;
+}
+
+.new-user-text{
+    margin-right: 1rem;
+    margin-left: 0.5rem;
+}
+
