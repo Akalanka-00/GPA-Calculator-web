@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
-import Axios from "axios";
+import { Axios } from "axios";
 
 import "./SignUp.css";
+import axios from "axios";
 
 const SignUp = () => {
   const [userData, setUserData] = useState({
@@ -19,9 +20,14 @@ const SignUp = () => {
   });
 
   const addUser = (dbUserData) => {
-    Axios.post('http://localhost:3000/create',dbUserData).then(()=>{
+    console.log(dbUserData)
+    try {
+      axios.post('http://localhost:8000/signup',dbUserData).then(()=>{
       console.log("User Saved Successful")
     })
+    } catch (error) {
+      console.log(error)
+    }
   };
 
   function handleSubmit(e) {
@@ -66,6 +72,18 @@ const SignUp = () => {
       }
     }
   }
+
+  useEffect(()=>{
+    const fetchAllUsers = async ()=>{
+      try {
+        const res = await axios.get('http://localhost:8000/signup')
+        console.log(res)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    fetchAllUsers()
+  })
   return (
     <div className="bg-light">
       <div className="container">
@@ -87,6 +105,7 @@ const SignUp = () => {
                     name="fname"
                     required
                     autoComplete="first-name"
+                    id="fname"
                     onChange={(e) =>
                       setUserData({ ...userData, fname: e.target.value })
                     }
@@ -104,6 +123,7 @@ const SignUp = () => {
                     type="text"
                     placeholder="John"
                     name="lname"
+                    id="lname"
                     required
                     autoComplete="family-name"
                     onChange={(e) =>
@@ -138,6 +158,7 @@ const SignUp = () => {
                     placeholder="Doe"
                     name="email"
                     required
+                    id="email"
                     autoComplete="email"
                     onChange={(e) =>
                       setUserData({ ...userData, email: e.target.value })
@@ -152,6 +173,7 @@ const SignUp = () => {
                     type="password"
                     placeholder="Password"
                     required
+                    id="psw1"
                     onChange={(e) =>
                       setUserData({ ...userData, psw: e.target.value })
                     }
@@ -168,6 +190,7 @@ const SignUp = () => {
                     type="password"
                     placeholder="Password"
                     required
+                    id="psw2"
                     onChange={(e) =>
                       setUserData({ ...userData, cpsw: e.target.value })
                     }
