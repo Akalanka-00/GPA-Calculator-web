@@ -200,7 +200,7 @@ const SignUp = () => {
 
               <div className="d-grid">
                 <Button
-                  className="btn btn-success"
+                  className="btn btn-primary"
                   variant="primary"
                   type="submit"
                 >
