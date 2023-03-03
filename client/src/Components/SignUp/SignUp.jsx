@@ -5,8 +5,6 @@ import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
-import { Axios } from "axios";
-
 import "./SignUp.css";
 import axios from "axios";
 
@@ -16,17 +14,22 @@ const SignUp = () => {
     lname: "",
     email: "",
     psw: "",
-    cpsw: "",
+  });
+  const [cpsw, setCpsw] = useState("");
+  const [dbUserData, setDbUserData] = useState({
+    fname: "",
+    lname: "",
+    email: "",
+    psw: "",
+    createdDateTime: "",
   });
 
-  const addUser = (dbUserData) => {
-    console.log(dbUserData)
+  const addUser = async () => {
+    console.log(dbUserData);
     try {
-      axios.post('http://localhost:8000/signup',dbUserData).then(()=>{
-      console.log("User Saved Successful")
-    })
+      await axios.post("http://localhost:8000/signup", dbUserData);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   };
 
@@ -39,11 +42,13 @@ const SignUp = () => {
       !userData.lname ||
       !userData.email ||
       !userData.psw ||
-      !userData.cpsw
+      !cpsw
     ) {
       alert("Please fill out all fields");
     } else {
-      if (userData.cpsw != userData.psw) {
+      if (
+        
+        cpsw != userData.psw) {
         alert("Please enter password again");
       } else {
         var today = new Date(),
@@ -53,43 +58,49 @@ const SignUp = () => {
             (today.getMonth() + 1) +
             "-" +
             today.getDate() +
-        " " +
-          today.getHours() +
-          ":" +
-          today.getMinutes() +
-          ":" +
-          today.getSeconds();
+            " " +
+            today.getHours() +
+            ":" +
+            today.getMinutes() +
+            ":" +
+            today.getSeconds();
 
-        const dbUserData = {
-          fname: userData.fname,
-          lname: userData.lname,
-          email: userData.email,
-          psw: userData.psw,
-          createdDateTime: dnt
-        };
+        // const dbUserData = {
+        //   fname: userData.fname,
+        //   lname: userData.lname,
+        //   email: userData.email,
+        //   psw: userData.psw,
+        //   createdDateTime: dnt
+        // };
 
-        addUser(dbUserData);
+        // setDbUserData({ ...dbUserData, fname: userData.fname })
+        // setDbUserData({ ...dbUserData, lname: userData.lname });
+        // setDbUserData({ ...dbUserData, email: userData.email });
+        // setDbUserData({ ...dbUserData, psw: userData.psw });
+        // setDbUserData({ ...dbUserData, createdDateTime: dnt });
+
+        addUser();
       }
     }
   }
 
-  useEffect(()=>{
-    const fetchAllUsers = async ()=>{
-      try {
-        const res = await axios.get('http://localhost:8000/signup')
-        console.log(res)
-      } catch (error) {
-        console.log(error)
-      }
-    }
-    fetchAllUsers()
-  })
+  // useEffect(()=>{
+  //   const fetchAllUsers = async ()=>{
+  //     try {
+  //       const res = await axios.get('http://localhost:8000/signup')
+  //       console.log(res)
+  //     } catch (error) {
+  //       console.log(error)
+  //     }
+  //   }
+  //   fetchAllUsers()
+  // })
   return (
     <div className="bg-light">
       <div className="container">
         <Row className="mt-5">
           <Col lg={4} className="bg-light m-auto rounded-top wrapper">
-            <h2 className="text-center pt-3">Welcome to  Calculator</h2>
+            <h2 className="text-center pt-3">Welcome to Calculator</h2>
             <p className="text-center text-muted lead">Join Now</p>
 
             <Form action="#" autoComplete="on" onSubmit={handleSubmit}>
@@ -106,9 +117,10 @@ const SignUp = () => {
                     required
                     autoComplete="first-name"
                     id="fname"
-                    onChange={(e) =>
-                      setUserData({ ...userData, fname: e.target.value })
-                    }
+                    onChange={(e) => {
+                      setUserData({ ...userData, fname: e.target.value });
+                      setDbUserData({ ...dbUserData, fname: userData.fname })
+                    }}
                   />
                 </FloatingLabel>
               </div>

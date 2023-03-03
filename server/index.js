@@ -20,13 +20,13 @@ app.get("/", (req, res) => {
   res.json("hello this is backend! home from backend server.");
 });
 
-app.get("/signup", (req, res) => {
-  const q = "SELECT * FROM userCredentials";
-  db.query(q, (err, data) => {
-    if (err) return res.json(err);
-    return res.json(data);
-  });
-});
+// app.get("/signup", (req, res) => {
+//   const q = "SELECT * FROM gpacalculator.usercredentials";
+//   db.query(q, (err, data) => {
+//     if (err) return res.json(err);
+//     return res.json(data);
+//   });
+// });
 
 app.post("/signup", (req, res) => {
   const q = "INSERT INTO userCredentials (`fname`,`lname`,`email`,`psw`,`createdDateTime`) VALUES (?)";
