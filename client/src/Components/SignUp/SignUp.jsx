@@ -204,7 +204,7 @@ const SignUp = () => {
                     required
                     id="psw2"
                     onChange={(e) =>
-                      setUserData({ ...userData, cpsw: e.target.value })
+                      setCpsw(e.target.value)
                     }
                   />
                 </FloatingLabel>

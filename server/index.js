@@ -29,7 +29,7 @@ app.get("/", (req, res) => {
 // });
 
 app.post("/signup", (req, res) => {
-  const q = "INSERT INTO userCredentials (`fname`,`lname`,`email`,`psw`,`createdDateTime`) VALUES (?)";
+  const q = "INSERT INTO userCredentials (fname,lname,email,psw,createdDateTime) VALUES (?)";
 //   const values = [
 //         "fname from Back",
 //         "lname from back",
