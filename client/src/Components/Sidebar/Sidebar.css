@@ -103,9 +103,8 @@ header .sidebar-image-text .header-text{
 
 }
 
-.sidebar li a:hover{
+.sidebar li a:hover {
 background-color: var(--primary-color);
-color: var(--sidebar-color);
 
 }
 
@@ -113,4 +112,60 @@ color: var(--sidebar-color);
 .sidebar li a .nav-item-text:hover{
 
     color: var(--sidebar-color);
+}
+
+.sidebar .menu-bar{
+    height: 90%;
+    padding-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.menu-bar .mode{
+    background-color: var(--primary-color-light);
+}
+.menu-bar .mode .moon-sun{
+    height: 3.125rem;
+    width: 3.75rem;
+    display: flex;
+    align-items: center;
+}
+.menu-bar .mode i{
+    position: absolute;
+}
+
+.menu-bar .mode i.sun{
+    opacity: 0;
+}
+
+.menu-bar .mode .toggle-switch{
+    height: 100%;
+    min-width: 3.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.toggle-switch .switch{
+    position: relative;
+    height: 1.375rem;
+    width: 2.75rem;
+    border-radius: 25px;
+    background-color: var(--toggle-color);
+    cursor: pointer;
+
+}
+
+.switch::before{
+    height: 0.938rem;
+    width: 0.938rem;
+    content: '';
+    position: absolute;
+    border-radius: 50px;
+    top: 50%;
+    left: 5px;
+    transform: translateY(-50%);
+    background-color: var(--sidebar-color);
+    cursor: pointer;
 }
