@@ -1,32 +1,29 @@
-import express from "express";
-import mysql from "mysql";
-import cors from "cors";
+const express = require("express");
+const cors = require("cors");
+const dotenv = require("dotenv");
+const bodyParser = require("body-parser");
+var path = require("path");
+
+const auth_router = require('./routes/auth_router')
+
+
+
+dotenv.config();
 
 const app = express();
+app.use(cors());
+app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname, "public")));
 
-const db = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "pass@123",
-  database: "gpacalculator",
-});
+app.use('/api/auth',auth_router)
 //if there is a athu err, use bellow query in db
 //ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'your_current_password';
-
-app.use(express.json());
-app.use(cors());
 
 app.get("/", (req, res) => {
   res.json("hello this is backend! home from backend server.");
 });
 
-// app.get("/signup", (req, res) => {
-//   const q = "SELECT * FROM gpacalculator.usercredentials";
-//   db.query(q, (err, data) => {
-//     if (err) return res.json(err);
-//     return res.json(data);
-//   });
-// });
+
 
 app.post("/signup", (req, res) => {
   const q = "INSERT INTO userCredentials (fname,lname,email,psw,createdDateTime) VALUES (?)";
@@ -78,6 +75,6 @@ app.put("/books:id", (req, res) => {
   });
 });
 
-app.listen(8000, () => {
-  console.log("connected to the backend 8000!");
-});
+app.listen(process.env.PORT,()=>{
+  console.log('server started in port : ',process.env.PORT)
+})

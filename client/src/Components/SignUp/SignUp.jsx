@@ -5,96 +5,74 @@ import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
-import "./SignUp.css";
-import axios from "axios";
+import { Route, Routes, useNavigate } from 'react-router-dom';
 
-const SignUp = () => {
-  const [userData, setUserData] = useState({
-    fname: "",
-    lname: "",
-    email: "",
-    psw: "",
-  });
+import baseUrl from "../../Apis/baseUrl";
+import "./SignUp.css";
+
+function SignUp () {
+
+  const [fname, setFname] = useState("");
+  const [lname, setLname] = useState("");
+  const [email, setEmail] = useState("");
+  const [psw, setPsw] = useState("");
   const [cpsw, setCpsw] = useState("");
-  const [dbUserData, setDbUserData] = useState({
-    fname: "",
-    lname: "",
-    email: "",
-    psw: "",
-    createdDateTime: "",
-  });
+
+  const navigate = useNavigate();
+
 
   const addUser = async () => {
-    console.log(dbUserData);
-    try {
-      await axios.post("http://localhost:8000/signup", dbUserData);
-    } catch (error) {
-      console.log(error);
-    }
+    console.log(setDnT());
+    const dbUserData = {
+      fname: fname,
+      lname: lname,
+      email: email,
+      psw: psw,
+      createdDateTime: setDnT(),
+    };
+    baseUrl
+      .post("/api/auth/register", dbUserData)
+      .then((res) => {
+        //alert(res.data);
+        console.log(res.data)
+        navigate('/dashboard', { replace: true });        
+      })
+      .catch((err) => {
+        alert(err);
+      });
   };
+
+  function setDnT() {
+    var today = new Date(),
+      dnt =
+        today.getFullYear() +
+        "-" +
+        (today.getMonth() + 1) +
+        "-" +
+        today.getDate() +
+        " " +
+        today.getHours() +
+        ":" +
+        today.getMinutes() +
+        ":" +
+        today.getSeconds();
+
+    return dnt;
+  }
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(userData);
 
-    if (
-      !userData.fname ||
-      !userData.lname ||
-      !userData.email ||
-      !userData.psw ||
-      !cpsw
-    ) {
+    if (!fname || !lname || !email || !psw || !cpsw) {
       alert("Please fill out all fields");
     } else {
-      if (
-        
-        cpsw != userData.psw) {
+      if (cpsw != psw) {
         alert("Please enter password again");
       } else {
-        var today = new Date(),
-          dnt =
-            today.getFullYear() +
-            "-" +
-            (today.getMonth() + 1) +
-            "-" +
-            today.getDate() +
-            " " +
-            today.getHours() +
-            ":" +
-            today.getMinutes() +
-            ":" +
-            today.getSeconds();
-
-        // const dbUserData = {
-        //   fname: userData.fname,
-        //   lname: userData.lname,
-        //   email: userData.email,
-        //   psw: userData.psw,
-        //   createdDateTime: dnt
-        // };
-
-        // setDbUserData({ ...dbUserData, fname: userData.fname })
-        // setDbUserData({ ...dbUserData, lname: userData.lname });
-        // setDbUserData({ ...dbUserData, email: userData.email });
-        // setDbUserData({ ...dbUserData, psw: userData.psw });
-        // setDbUserData({ ...dbUserData, createdDateTime: dnt });
-
         addUser();
       }
     }
   }
-
-  // useEffect(()=>{
-  //   const fetchAllUsers = async ()=>{
-  //     try {
-  //       const res = await axios.get('http://localhost:8000/signup')
-  //       console.log(res)
-  //     } catch (error) {
-  //       console.log(error)
-  //     }
-  //   }
-  //   fetchAllUsers()
-  // })
   return (
     <div className="bg-light">
       <div className="container">
@@ -118,8 +96,9 @@ const SignUp = () => {
                     autoComplete="first-name"
                     id="fname"
                     onChange={(e) => {
-                      setUserData({ ...userData, fname: e.target.value });
-                      setDbUserData({ ...dbUserData, fname: userData.fname })
+                      // setUserData({ ...userData, fname: e.target.value });
+                      // setDbUserData({ ...dbUserData, fname: userData.fname })
+                      setFname(e.target.value);
                     }}
                   />
                 </FloatingLabel>
@@ -139,7 +118,8 @@ const SignUp = () => {
                     required
                     autoComplete="family-name"
                     onChange={(e) =>
-                      setUserData({ ...userData, lname: e.target.value })
+                      //setUserData({ ...userData, lname: e.target.value })
+                      setLname(e.target.value)
                     }
                   />
                 </FloatingLabel>
@@ -172,9 +152,7 @@ const SignUp = () => {
                     required
                     id="email"
                     autoComplete="email"
-                    onChange={(e) =>
-                      setUserData({ ...userData, email: e.target.value })
-                    }
+                    onChange={(e) => setEmail(e.target.value)}
                   />
                 </FloatingLabel>
               </div>
@@ -186,9 +164,7 @@ const SignUp = () => {
                     placeholder="Password"
                     required
                     id="psw1"
-                    onChange={(e) =>
-                      setUserData({ ...userData, psw: e.target.value })
-                    }
+                    onChange={(e) => setPsw(e.target.value)}
                   />
                 </FloatingLabel>
               </div>
@@ -203,9 +179,7 @@ const SignUp = () => {
                     placeholder="Password"
                     required
                     id="psw2"
-                    onChange={(e) =>
-                      setCpsw(e.target.value)
-                    }
+                    onChange={(e) => setCpsw(e.target.value)}
                   />
                 </FloatingLabel>
               </div>

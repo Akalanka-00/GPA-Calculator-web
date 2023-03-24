@@ -1,0 +1,116 @@
+
+
+.sidebar{
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 15.625rem;
+    padding: 0.625rem 0.875rem;
+    background-color: var(--sidebar-color);
+
+}
+
+.sidebar li{
+    height: 3.125rem;
+    margin-top: 0.625rem;
+    list-style: none;
+    display: flex;
+    align-items: center;
+}
+
+.sidebar li .nav-item-icon{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    min-width: 3.75rem;
+
+}
+
+.sidebar li .nav-item-icon, 
+.sidebar li .nav-item-text{
+    color: var(--text-color);
+    transition: all 0.3 ease;
+
+}
+.sidebar header{
+    position: relative;
+}
+
+.sidebar .text{
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+.sidebar .sidebar-image-text .sidebar-image{
+    min-width: 3.75rem;
+    display: flex;
+    align-items: center;
+
+}
+
+.sidebar .sidebar-image-text .sidebar-image img{
+    width: 2.5rem;
+    border-radius: 6px;
+}
+.sidebar header .sidebar-image-text{
+    display: flex;
+    align-items: center;
+}
+
+header .sidebar-image-text .header-text{
+    display: flex;
+    flex-direction: column;
+
+}
+
+.header-text .title, .sub-title{
+    font-weight: 600;
+
+}
+
+.header-text .sub-title{
+    margin-top: -2px;
+}
+
+.toggle{
+    position: absolute;
+    top: 50%;
+    right: -1.563rem;
+    height: 1.563rem;
+    width: 1.563rem;
+    color: var(--sidebar-color);
+    background-color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 22px;
+    transform: translateY(-50%);
+
+}
+
+.sidebar li a{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: all 0.4 ease;
+
+}
+
+.sidebar li a:hover{
+background-color: var(--primary-color);
+color: var(--sidebar-color);
+
+}
+
+.sidebar li a .nav-item-icon:hover,
+.sidebar li a .nav-item-text:hover{
+
+    color: var(--sidebar-color);
+}
