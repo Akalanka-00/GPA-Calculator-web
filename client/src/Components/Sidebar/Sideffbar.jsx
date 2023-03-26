@@ -1,5 +1,4 @@
 import React from "react";
-import { HiOutlineChevronRight } from "react-icons/hi";
 import "./Sidebar.css";
 
 import Logo from "../../Assets/Images/logo.png";
@@ -84,6 +83,7 @@ const Sidebar = () => {
           </div>
         </div>
       </nav>
+
     </div>
   );
 };
