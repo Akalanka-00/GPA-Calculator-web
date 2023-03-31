@@ -1,4 +1,4 @@
-var connection = require('../service/connection');
+var connection = require('../../service/connection');
 const send_mails = require('../service/send_mails');
 
 function generate_random_id(){

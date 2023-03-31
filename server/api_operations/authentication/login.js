@@ -1,4 +1,4 @@
-var connection = require('../service/connection')
+var connection = require('../../service/connection')
 
 module.exports = function login(req , res){
     console.log(req.body)

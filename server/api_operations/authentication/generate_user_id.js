@@ -1,4 +1,4 @@
-var connection = require("../service/connection");
+var connection = require("../../service/connection");
 
 function generate_random_id(){
     let result = "";

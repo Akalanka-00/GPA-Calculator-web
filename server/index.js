@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 var path = require("path");
 
 const auth_router = require('./routes/auth_router')
+const service_router = require('./routes/service_router')
 
 
 
@@ -16,6 +17,8 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use('/api/auth',auth_router)
+app.use('/api/service',service_router)
+
 //if there is a athu err, use bellow query in db
 //ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'your_current_password';
 

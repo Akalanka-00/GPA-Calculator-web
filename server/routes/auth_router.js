@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 
-var register = require("../authentication/register")
+var register = require("../api_operations/authentication/login")
 
 
 router.post('/login' ,(req,res,next)=>{
