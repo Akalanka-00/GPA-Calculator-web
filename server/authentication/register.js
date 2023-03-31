@@ -1,4 +1,5 @@
-var connection = require('../service/connection')
+var connection = require('../service/connection');
+const send_mails = require('../service/send_mails');
 
 function generate_random_id(){
     let result = "";
@@ -49,11 +50,14 @@ function generate_user_id(req, res) {
 module.exports = async function user_register(req , res){
     const data = req.body;
     console.log(generate_random_id())
-    var sql = "INSERT INTO userCredentials (user_id, fname, lname, email, psw, createdDateTime)" + "VALUES('"+ generate_random_id()+"','"+data.fname+"','"+data.lname+"','"+data.email+"','"+data.psw+"','"+data.createdDateTime+"')"
-    console.log(sql)
+    const user_id = generate_random_id();
+    var sql = "INSERT INTO userCredentials (user_id, fname, lname, email, psw, createdDateTime)" + "VALUES('"+ user_id+"','"+data.fname+"','"+data.lname+"','"+data.email+"','"+data.psw+"','"+data.createdDateTime+"')"
+   // console.log(sql)
     connection.query(sql, function (err, result, fields) {
         if (err) res.send(err);
-            console.log(result)
+            console.log(result);
+            const mail_body = "Hey! "+data.fname+"','"+data.lname+",\nWelcome to the GPA Calculator.\nYour user id is "+ user_id+"\nContinue from here: http://192.168.127.207:3000 \nThank you!";
+           // send_mails(data.email,"Welcome to GPA Calculator",mail_body)
             res.send("Login Successful")
     })
 

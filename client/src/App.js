@@ -5,7 +5,8 @@ import SignUp from "./Components/SignUp/SignUp";
 import Home from "./Components/Home/Home";
 
 import "./App.css";
-import DashboardContainer from "./Components/Dashboard/DashboardContainer/DashboardContainer";
+import Dashboard from "./Components/Dashboard/Dashboard/Dashboard";
+import Results from "./Components/Dashboard/Results/Results";
 
 function App() {
   return (
@@ -25,8 +26,14 @@ function App() {
             <Route index element={<Home/>} />
             <Route path="signup"  element={<SignUp />}/>
             <Route path="signin"  element={<SignIn />}/>
-            <Route path="dashboard"  element={<DashboardContainer />}/>
             <Route path="signin"  element={<SignIn />}/>
+
+            <Route path="dashboard/">
+            <Route index  element={<Dashboard />}/>
+            <Route path="results"  element={<Results />}/>
+
+            </Route>
+
             
           </Route>
         </Routes>

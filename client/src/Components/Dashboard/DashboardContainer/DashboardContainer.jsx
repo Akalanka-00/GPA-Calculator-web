@@ -1,13 +1,16 @@
 import React from 'react'
 import Sidebar from '../Sidebar/Sidebar'
+import Navbar from '../TopNavBar/Navbar'
 
 import "./DashboardContainer.scss"
 
 const DashboardContainer = () => {
   return (
-    <div className='dashboard-container'>
+    <div className='dashboard'>
       <Sidebar/>
-      <div className="home-container">Container</div>
+      <div className="dashboard-container">
+        <Navbar/>
+      </div>
     </div>
   )
 }
