@@ -28,6 +28,10 @@ const SignIn = () => {
   //Declare User ID Variable
   const [userID, setUserID] = useState("User id");
 
+  //Set User ID
+  function setCurrentUserId(){
+    setUserID("User ID");
+  }
   //Validation of the user input
   function loginValidation() {
     if (!userModel.email) {
@@ -60,45 +64,63 @@ const SignIn = () => {
   };
 
   function logingToSystem() {
+
+    console.log(userModel)
+    baseUrl.post("/api/auth/login",userModel)
+    .then((res) => {
+      console.log("User log");
+     console.log(res.data);
+    })
+    .catch((err) => {
+      alert(err);
+    });
+    HandleLog();
+   
+  }
+
+  //Save log data functioin
+  function HandleLog(){
     SaveLogData(
       logAction.user_log_succeesful,
-      ipContainer.country,
-      ipContainer.country__code,
+      ipContainer.country_name,
+      ipContainer.country_code,
       ipContainer.IPv4,
       macContainer,
       ipContainer.latitude,
-      ipContainer.longtitude,
+      ipContainer.longitude,
       userID
     );
   }
 
-  //Login function
+  //Handle Login submition
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(userModel);
-    logingToSystem();
+    //console.log(userModel);
+    
 
     //Change warning text visibility
-    const validation = loginValidation();
-    const advance_validation = AdvanceLoginValidation();
-    if (validation && advance_validation) {
+  
+    if (loginValidation() ) {
+      if(AdvanceLoginValidation()){
+        logingToSystem();
+      }
     }
   }
 
   //creating function to load ip address from the API
   const getData = async () => {
     const res = await axios.get("https://geolocation-db.com/json/");
-    console.log(res.data);
+    //console.log(res.data);
     setIpContainer(res.data);
   };
 
   //Creating function to load mac address from API
   const getMac = async () => {
     baseUrl
-      .get("/api/service/ipaddress")
+      .get("/api/service/macaddress")
       .then((res) => {
         setMacContainer(res.data);
-        console.log(res.data);
+        //console.log(res.data);
       })
       .catch((err) => {
         alert(err);
@@ -109,6 +131,8 @@ const SignIn = () => {
     //calling function to load ip address from the API
     getData();
     getMac();
+
+    setCurrentUserId();
   }, []);
 
   return (
@@ -121,13 +145,14 @@ const SignIn = () => {
               Hey! Welcome to the GPA Calculator
             </p>
 
-            {/* Get user email */}
+           
             <Form
               action="#"
               method="post"
               className="py-3"
               onSubmit={handleSubmit}
             >
+               {/* Get user email */}
               <div className="input-group mb-3">
                 <FloatingLabel
                   controlId="floatingEmail"

@@ -1,20 +1,24 @@
-var connection = require('../../service/connection')
+var connection = require('../../service/connection');
+const generate_token = require('./generate_token');
 
 module.exports = function login(req , res){
-    console.log(req.body)
-    connection.query("select * from userCredentials where username = '"+req.body.username+"'", function (err, result, fields) {
+    console.log(req.body);
+    const sql = "select * from userCredentials where email = '"+req.body.email+"'";
+    connection.query(sql, function (err, result, fields) {
         if (err) res.send(err);
-        if(req.body.password===result[0].password){
-            connection.query("select * from admin where user_id = "+result[0].user_id, function (err, result2, fields) {
-                if (err) res.send(err);
-                console.log(result2)
-                //const token = generate_token(result[0].user_id , result2[0].position)
-                //res.send(token)
+        userData = result[0];
+        //res.send(sql);
+        console.log({bodyPsw:req.body.password, userDataPsw:userData.psw})
+        if(req.body.password === userData.psw){
+            const token = generate_token(userData.user_id,);
+            console.log(token);
+            res.send(token);
 
-              });
+
         }
         else{
             res.send("error username or password")
-        }   
+        }  
       });
+
 }

@@ -9,6 +9,9 @@ import { Route, Routes, useNavigate } from 'react-router-dom';
 
 import baseUrl from "../../Apis/baseUrl";
 import "./SignUp.css";
+import logAction from "../../Model/LogActionData";
+import axios from "axios";
+import SaveLogData from "../../Apis/logData";
 
 function SignUp () {
 
@@ -17,6 +20,25 @@ function SignUp () {
   const [email, setEmail] = useState("");
   const [psw, setPsw] = useState("");
   const [cpsw, setCpsw] = useState("");
+   //Declare IpContainer Variable
+   const [ipContainer, setIpContainer] = useState({});
+   //Declare MacContainer Variable
+   const [macContainer, setMacContainer] = useState("");
+    //Declare User ID Variable
+  const [userID, setUserID] = useState("");
+
+  //Set User ID
+  function setCurrentUserId(){
+    console.log(email);
+    baseUrl.post("/api/auth/get/userid", email)
+    .then((res) => {     
+      setUserID(res.data);
+      console.log(res.data);
+    })
+    .catch((err) => {
+      alert(err);
+    });
+  }
 
   const navigate = useNavigate();
 
@@ -35,7 +57,37 @@ function SignUp () {
       .then((res) => {
         //alert(res.data);
         console.log(res.data)
-        navigate('/dashboard', { replace: true });        
+        SaveLogData(
+          logAction.user_register_successful,
+          ipContainer.country_name,
+          ipContainer.country_code,
+          ipContainer.IPv4,
+          macContainer,
+          ipContainer.latitude,
+          ipContainer.longitude,
+          userID
+        );
+       // navigate('/dashboard', { replace: true });        
+      })
+      .catch((err) => {
+        alert(err);
+      });
+  };
+
+   //creating function to load ip address from the API
+   const getData = async () => {
+    const res = await axios.get("https://geolocation-db.com/json/");
+    //console.log(res.data);
+    setIpContainer(res.data);
+  };
+
+  //Creating function to load mac address from API
+  const getMac = async () => {
+    baseUrl
+      .get("/api/service/macaddress")
+      .then((res) => {
+        setMacContainer(res.data);
+        //console.log(res.data);
       })
       .catch((err) => {
         alert(err);
@@ -43,21 +95,10 @@ function SignUp () {
   };
 
   function setDnT() {
-    var today = new Date(),
-      dnt =
-        today.getFullYear() +
-        "-" +
-        (today.getMonth() + 1) +
-        "-" +
-        today.getDate() +
-        " " +
-        today.getHours() +
-        ":" +
-        today.getMinutes() +
-        ":" +
-        today.getSeconds();
+    const currentDate = new Date();
+    const formattedDate = currentDate.toISOString().slice(0, 19).replace('T', ' '); // format as ISO string
 
-    return dnt;
+    return formattedDate;
   }
 
   function handleSubmit(e) {
@@ -69,10 +110,17 @@ function SignUp () {
       if (cpsw != psw) {
         alert("Please enter password again");
       } else {
+        setCurrentUserId();
         addUser();
       }
     }
   }
+
+  useEffect(()=>{
+     //calling function to load ip address from the API
+     getData();
+     getMac();
+  },[])
   return (
     <div className="bg-light">
       <div className="container">
