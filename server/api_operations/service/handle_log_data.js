@@ -1,5 +1,5 @@
 var connection = require('../../service/connection');
-const generate_id = require('../authentication/generate_id');
+const generate_id = "";
 
 
 module.exports = function handle_log_data(req,res){

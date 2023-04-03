@@ -6,7 +6,7 @@ const conn = mysql.createConnection({
     host: "localhost",
     user: "root",
     password: "pass@123",
-    database: "gpacalculator",
+    database: "gpa_calculator",
   });
 
   conn.connect(function(err) {

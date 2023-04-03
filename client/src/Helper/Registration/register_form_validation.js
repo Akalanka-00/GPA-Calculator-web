@@ -51,16 +51,16 @@ function passwordVerify(errors = {}, values){
 
 // Validate Confirm password
 function confirmPasswordVerify(errors = {}, values){
-    if(!values.confirmPasswod){
-        errors.confirmPasswod = toast.error( "Confirm Password Required...!");
+    if(!values.confirmpassword){
+        errors.confirmpassword = toast.error( "Confirm Password Required...!");
 
-    }else if(values.confirmPasswod.includes(" ")){
-        errors.confirmPasswod = toast.error("Invalid Confirm Password...!")
-    }else if(values.confirmPasswod.length<8 || values.confirmPasswod.length>20 ){
+    }else if(values.confirmpassword.includes(" ")){
+        errors.confirmpassword = toast.error("Invalid Confirm Password...!")
+    }else if(values.confirmpassword.length<8 || values.confirmpassword.length>20 ){
         errors.confirmPasswod = toast.error("Confirm Password must be more than 8 to 20 characters")
 
-    }else if(values.password=== values.confirmPasswod){
-        errors.confirmPasswod = toast.error("Password and Confirm password must be same")
+    }else if(values.password !== values.confirmpassword){
+        errors.confirmPasswod = toast.error(values.password)
     }
 
     return errors;

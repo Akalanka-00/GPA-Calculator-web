@@ -10,12 +10,22 @@ import avatar from "../../../Assets/Images/profile.png";
 import "../../../Styles/Registration_Styles.css";
 import convertToBase64 from "../../../Helper/convert";
 import { registerFormValidate } from "../../../Helper/Registration/register_form_validation";
+import baseUrl from "../../../apis/baseUrl";
 
 const Register = () => {
   const [file, setFile] = useState();
-  const [open, setOpen] = useState(true);
-  const cancelButtonRef = useRef(null);
 
+const saveUser = (userData)=>{
+ // console.log(userData);
+ baseUrl.post("/api/auth/register",userData)
+ .then((res)=>{
+  alert(res.data);
+ })
+ .catch((err) => { 
+  alert(err)
+})
+
+}
   const formik = useFormik({
     initialValues: {
       fname: "",
@@ -28,8 +38,8 @@ const Register = () => {
     validateOnBlur: false,
     validateOnChange: false,
     onSubmit: async (values) => {
-      values = await Object.assign(values, { profile: file || "" });
-      console.log(values);
+      values = Object.assign(values, { profile: file || "" });
+      saveUser(values);
     },
   });
 
