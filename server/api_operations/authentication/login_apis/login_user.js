@@ -9,7 +9,7 @@ module.exports = function login_user(req,res){
     connection.query(sql, function (err, result, fields) {
         if (err) {
             console.log(err);
-            res.status(500).send(err);
+            res.status(500).send({err});
         }else{
             if(result.length>0){
                 if(result[0].password === data.password){
