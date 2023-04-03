@@ -12,5 +12,5 @@ module.exports = function issue_token(userId){
     const token = jwt.sign(data, jwtSecretKey,{
         expiresIn: "60m"
       });
-      return token
+      return {token}
 }
