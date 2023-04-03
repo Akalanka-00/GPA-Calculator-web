@@ -1,9 +1,10 @@
 const express = require('express')
 const register_user = require('../api_operations/authentication/register_apis/register_user')
+const login_user = require('../api_operations/authentication/login_apis/login_user')
 const router = express.Router()
 
-router.post('/check/username' ,(req,res,next)=>{
-    // res.send(req.body);
+router.post('/login' ,(req,res,next)=>{
+    login_user(req,res);
 })
 
 router.post('/register' ,(req,res,next)=>{

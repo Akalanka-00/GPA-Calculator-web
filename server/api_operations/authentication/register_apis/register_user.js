@@ -18,7 +18,7 @@ module.exports = async function register_user(req, res){
         else{
            // console.log(result_check_email[0])
             if(result_check_email.length >0){
-                return res.status(200).send("This email is already registered. Please login in.")
+                return res.status(500).send("This email is already registered. Please login in.")
             }else
             {
                 connection.query(exist_username, function (exist_username_err, resul_check_username, fields) {

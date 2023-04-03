@@ -1,6 +1,6 @@
 import React, { Fragment, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { Toaster } from "react-hot-toast";
+import { Toaster, toast } from "react-hot-toast";
 import { useFormik } from "formik";
 import { Dialog, Transition } from "@headlessui/react";
 import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
@@ -22,7 +22,7 @@ const saveUser = (userData)=>{
   alert(res.data);
  })
  .catch((err) => { 
-  alert(err)
+  console.log(err.response.data)
 })
 
 }
