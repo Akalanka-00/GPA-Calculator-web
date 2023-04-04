@@ -9,7 +9,7 @@ import avatar from "../../../Assets/Images/profile.png";
 
 import "../../../Styles/Registration_Styles.css";
 import convertToBase64 from "../../../Helper/convert";
-import { registerFormValidate } from "../../../Helper/Registration/register_form_validation";
+import { registerValidation } from "../../../Helper/registration_validation/validate";
 
 const Profile = () => {
   const [file, setFile] = useState();
@@ -24,7 +24,7 @@ const Profile = () => {
       password:"",
       passwordpassword:""
     },
-    validate: registerFormValidate,
+    validate: registerValidation,
     validateOnBlur: false,
     validateOnChange: false,
     onSubmit: async (values) => {

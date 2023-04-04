@@ -9,21 +9,14 @@ import avatar from "../../../Assets/Images/profile.png";
 
 import "../../../Styles/Registration_Styles.css";
 import convertToBase64 from "../../../Helper/convert";
-import { registerFormValidate } from "../../../Helper/Registration/register_form_validation";
-import baseUrl from "../../../apis/baseUrl";
+import { registerValidation } from "../../../Helper/registration_validation/validate";
 
 const Register = () => {
   const [file, setFile] = useState();
 
 const saveUser = (userData)=>{
  // console.log(userData);
- baseUrl.post("/api/auth/register",userData)
- .then((res)=>{
-  alert(res.data);
- })
- .catch((err) => { 
-  console.log(err.response.data)
-})
+
 
 }
   const formik = useFormik({
@@ -34,7 +27,7 @@ const saveUser = (userData)=>{
       password:"",
       confirmpassword:""
     },
-    validate: registerFormValidate,
+    validate: registerValidation,
     validateOnBlur: false,
     validateOnChange: false,
     onSubmit: async (values) => {

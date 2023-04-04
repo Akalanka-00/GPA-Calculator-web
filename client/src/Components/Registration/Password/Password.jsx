@@ -7,7 +7,7 @@ import { useFormik } from "formik"
 import avatar  from "../../../Assets/Images/profile.png"
 
 import "../../../Styles/Registration_Styles.css"
-import { passwordValidate } from "../../../Helper/Registration/password_validation";
+import { passwordValidate } from "../../../Helper/registration_validation/validate";
 
 const Password = () => {
 

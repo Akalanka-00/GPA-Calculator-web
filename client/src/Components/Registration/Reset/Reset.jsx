@@ -4,7 +4,7 @@ import { Toaster } from "react-hot-toast"
 import { useFormik } from "formik"
 
 import "../../../Styles/Registration_Styles.css"
-import { resetPasswordValidate } from "../../../Helper/Registration/reset_password_validation";
+import { resetPasswordValidation } from "../../../Helper/registration_validation/validate";
 
 const Reset = () => {
 
@@ -13,7 +13,7 @@ const Reset = () => {
       Password:'',
       confirm_password:''
     },
-    validate: resetPasswordValidate,
+    validate: resetPasswordValidation,
     validateOnBlur:false,
     validateOnChange:false,
     onSubmit: async values =>{
