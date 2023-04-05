@@ -6,21 +6,23 @@ import connection from "../service/connection.js"
 /** middleware for verify user */
 export async function verifyUser(req, res, next){
     const { username } = req.method == "GET" ? req.query : req.body;
-    console.log(username);
+    //console.log(username);
     const sql =
     "SELECT * from user_credentials where username ='" + username + "'";
-    console.log(sql)
+    //console.log(sql)
   try {
     connection.query(sql, function (err, result, fields) {
       if (err) {
         console.log(err);
-        res.status(500).send(err);
+        return res.status(500).send(err);
       } else {
         if (!result.length > 0) {
           return res.status(404).send({ error: "Can't find the user" });
           
         }else{
-          next();
+          //next();
+          return res.status(200).send(username);
+
         }
       }
     });

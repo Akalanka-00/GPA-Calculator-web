@@ -1,6 +1,5 @@
-const nodemailer = require("nodemailer");
-const mailgen = require("mailgen");
-const dotenv = require("dotenv");
+import nodemailer from 'nodemailer';
+import Mailgen from 'mailgen';
 
 
 let nodeConfig = {
@@ -15,7 +14,7 @@ let nodeConfig = {
 
 let transporter = nodemailer.createTransport(nodeConfig);
 
-let MailGenerator = new mailgen({
+let MailGenerator = new Mailgen({
     theme:"default",
     product:{
         name:"Mailgen",
@@ -24,15 +23,14 @@ let MailGenerator = new mailgen({
 })
 
 const registerMail = async (req,res)=>{
-    dotenv.config();
     const {username, userEmail, text, subject} = req.body;
 
     //email body
     var email = {
         body:{
             name:username,
-            intro : text || 'Welcome to Daily Tuition! We\'re very excited to have you on board.',
-            outro: 'Need help, or have questions? Just reply to this email, we\'d love to help.'       
+            intro : text || 'Welcome to Daily GPA Calculator! We\'re very excited to have you on board.',
+            outro: 'This is a generated mail. Please do not reply to this.'       
          }
     }
     var emailBody = MailGenerator.generate(email);
@@ -53,4 +51,4 @@ const registerMail = async (req,res)=>{
 }
 
 
-module.exports = registerMail;
+export default registerMail;

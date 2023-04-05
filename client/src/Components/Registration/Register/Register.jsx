@@ -1,5 +1,5 @@
 import React, { Fragment, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Toaster, toast } from "react-hot-toast";
 import { useFormik } from "formik";
 import { Dialog, Transition } from "@headlessui/react";
@@ -10,12 +10,14 @@ import avatar from "../../../Assets/Images/profile.png";
 import "../../../Styles/Registration_Styles.css";
 import convertToBase64 from "../../../Helper/convert";
 import { registerValidation } from "../../../Helper/registration_validation/validate";
+import { registerUser } from "../../../Helper/helper";
 
 const Register = () => {
   const [file, setFile] = useState();
+  const navigate = useNavigate()
 
 const saveUser = (userData)=>{
- // console.log(userData);
+  console.log(userData);
 
 
 }
@@ -32,7 +34,14 @@ const saveUser = (userData)=>{
     validateOnChange: false,
     onSubmit: async (values) => {
       values = Object.assign(values, { profile: file || "" });
-      saveUser(values);
+
+      let registerPromise = registerUser(values);
+      toast.promise(registerPromise,{
+        loading:"Creating...",
+        success: <b>Register successfully....</b>,
+        error:<b>Could not register</b>
+      });
+      navigate("/username")
     },
   });
 
