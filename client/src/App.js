@@ -8,14 +8,14 @@ import Profile from "./Components/Registration/Profile/Profile";
 import Recovery from "./Components/Registration/Recovery/Recovery";
 import Reset from "./Components/Registration/Reset/Reset";
 import PageNotFound from "./Components/PageNotFound/PageNotFound";
-import { AuthorizeUser, ProtectRoutes } from "./middleware/Auth";
+import { AuthorizeLogin, AuthorizeUser, ProtectRoutes } from "./middleware/Auth";
 import Dashboard from "./Components/Dashboard/DashboardComp/Dashboard";
 
 //Route routes
 const router = createBrowserRouter([
   {
     path:'/',
-    element:<Username></Username>
+    element:<AuthorizeLogin><Username/></AuthorizeLogin>
   },
 
   {

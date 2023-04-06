@@ -20,3 +20,13 @@ export const ProtectRoutes = ({children})=>{
 
     return children;
 }
+
+export const AuthorizeLogin = ({children})=>{
+    const token = localStorage.getItem('token');
+
+    if(token){
+        return <Navigate to={'/dashboard'} replace={true}></Navigate>
+    }
+
+    return children;
+}
