@@ -41,7 +41,7 @@ const saveUser = (userData)=>{
         success: <b>Register successfully....</b>,
         error:<b>Could not register</b>
       });
-      navigate("/username")
+      navigate("/")
     },
   });
 

@@ -14,7 +14,7 @@ export default function useFetch(query){
             try {
                 setData(prev => ({ ...prev, isLoading: true}));
 
-                //const { username } = !query ? await getUsername() : '';
+                const { username } = !query ? await getUsername() : '';
                 
                // const { data, status } = !query ? await baseUrl.get(`/user/${username}`) : await baseUrl.get(`/${query}`);
                const { data, status } =  await baseUrl.get(`/user/${query}`);

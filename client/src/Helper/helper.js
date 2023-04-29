@@ -4,6 +4,10 @@ import baseUrl from "../Apis/baseUrl";
 
 
 
+export function logoutUser(){
+  localStorage.removeItem('token');
+}
+
 /** To get username from Token */
 export async function getUsername(){
   const token = localStorage.getItem('token')
