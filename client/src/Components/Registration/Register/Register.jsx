@@ -61,8 +61,8 @@ const saveUser = (userData)=>{
               Happy to join you!
             </span>
           </div>
-          <form className="py-1" onSubmit={formik.handleSubmit}>
-            <div className="profile flex justify-center py-4">
+          <form className="" onSubmit={formik.handleSubmit}>
+            <div className="profile flex justify-center py-1">
               <label htmlFor="profile">
                 <img
                   src={file || avatar}

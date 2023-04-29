@@ -50,7 +50,7 @@ import Subjects from "./Components/dashboard/subPages/Subjects";
 // ])
 function App() {
   return (
-    <main className="text-gray-400 bg-gray-800 body-font">
+    <main className="">
       {/* <RouterProvider router={router}></RouterProvider> */}
 
       <Router>
