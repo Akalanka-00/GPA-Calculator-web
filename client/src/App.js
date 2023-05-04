@@ -61,7 +61,7 @@ function App() {
           <Route path="/recovery" element={<Recovery></Recovery>}/>
           <Route path="/reset" element={<Reset></Reset>}/>
 
-          <Route path="/dashboard/*" element={<AuthorizeUser><Dashboard/></AuthorizeUser>}>
+          <Route  path="/dashboard/*" element={<AuthorizeUser><Dashboard/></AuthorizeUser>}>
             <Route index element={<AuthorizeUser><Main/></AuthorizeUser>} />
             <Route path="myGPA/" element={<MyGPA />} />
             <Route path="subjects/" element={<Subjects />} />

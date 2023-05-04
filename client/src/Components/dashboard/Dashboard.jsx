@@ -5,7 +5,7 @@ import { Outlet } from "react-router-dom"
 
 const Dashboard = () => {
   return (
-    <div className='flex'>
+    <div className='flex bg-gray-800 text-white'>
       <div className='basis-[14%] h-[100vh]'>
         <Sidebar/>
       </div>
