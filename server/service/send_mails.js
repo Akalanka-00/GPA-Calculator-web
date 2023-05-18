@@ -8,8 +8,8 @@ module.exports = function sendMails(to , subject , body){
         port: 465,
         secure: true,
         auth: {
-            user: "shenalakalanka513@gmail.com",
-            pass: "Diologb@34"
+            user: "",
+            pass: ""
         }
     });
     
